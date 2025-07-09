@@ -24,7 +24,7 @@ p {
 
 .app-container {
   width: 250px;
-  height: 420px;
+  height: 500px;
   margin: 40px auto;
   text-align: center;
   border-radius: 5px;
@@ -61,7 +61,7 @@ p {
   z-index: 1;
 }
 
- .right-side {
+.right-side {
   top: 0;
   left: 100px;
   transform-origin: left center;
@@ -87,9 +87,49 @@ p {
   color: #d8e9ef;
 }
 
-button {
+/* Input styling */
+.time-input-container {
+  margin: 20px 0;
+}
+
+.time-input-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #d8e9ef;
+}
+
+.time-input {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #bf5239;
+  border-radius: 5px;
+  padding: 8px 12px;
+  color: #d8e9ef;
+  font-size: 16px;
+  width: 60px;
+  text-align: center;
+}
+
+.time-input:focus {
+  outline: none;
+  border-color: #e85a71;
+}
+
+.time-input::placeholder {
+  color: #90c0d1;
+}
+
+/* Button styling */
+.button-container {
   position: relative;
   top: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button {
   font-size: 80%;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -97,8 +137,35 @@ button {
   background: none;
   outline: none;
   color: #d8e9ef;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 button:hover {
   color: #90c0d1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:disabled:hover {
+  color: #d8e9ef;
+  background: none;
+}
+
+.btn-start {
+  background: rgba(191, 82, 57, 0.3);
+}
+
+.btn-pause {
+  background: rgba(232, 90, 113, 0.3);
+}
+
+.btn-reset {
+  background: rgba(144, 192, 209, 0.3);
 }
