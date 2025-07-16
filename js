@@ -1,3 +1,4 @@
+// pomodoro
 const bells = new Audio('./sounds/bell.wav'); 
 const startBtn = document.querySelector('.btn-start'); 
 const pauseBtn = document.querySelector('.btn-pause'); 
@@ -6,10 +7,27 @@ const timeInput = document.querySelector('#timeInput');
 const session = document.querySelector('.minutes'); 
 const appMessage = document.querySelector('.app-message');
 
+//pomordoro
 let myInterval; 
 let state = 'stopped'; // stopped or running or paused
 let totalSeconds = 0;
 let originalMinutes = 25;
+
+// things for unlocking recipes
+let totalStudyMinutes = 0;
+const totalMinutesElement = document.getElementById('totalMinutes');
+const recipeListElement = document.getElementById('recipeList');
+
+const recipes = [
+  { minutes: 1, name: "Espresso Shot" },
+  { minutes: 2, name: "Cappuccino" },
+  { minutes: 120, name: "Iced Latte" },
+  { minutes: 180, name: "Mocha Deluxe" },
+  { minutes: 240, name: "Cold Brew Supreme" }
+];
+
+let unlockedRecipes = [];
+
 
 // display times
 const updateDisplay = (minutes, seconds) => {
@@ -61,6 +79,7 @@ const updateSeconds = () => {
   if (minutesLeft === 0 && secondsLeft === 0) {
     bells.play();
     clearInterval(myInterval);
+    updateProgress(originalMinutes);
     state = 'stopped';
     appMessage.textContent = 'Time\'s up! Press start to begin again';
     updateButtons();
@@ -113,6 +132,22 @@ const updateInputDisplay = () => {
     updateDisplay(minutes, 0);
   }
 }
+
+// recipe unlocker function
+const updateProgress = (sessionMinutes) => {
+  totalStudyMinutes += sessionMinutes;
+  totalMinutesElement.textContent = totalStudyMinutes;
+
+  recipes.forEach(recipe => {
+    if (totalStudyMinutes >= recipe.minutes && !unlockedRecipes.includes(recipe.name)) {
+      unlockedRecipes.push(recipe.name);
+      const li = document.createElement('li');
+      li.textContent = recipe.name;
+      recipeListElement.appendChild(li);
+    }
+  })
+}
+
 
 // event listeners
 startBtn.addEventListener('click', startTimer);
