@@ -4,8 +4,11 @@ const startBtn = document.querySelector('.btn-start');
 const pauseBtn = document.querySelector('.btn-pause'); 
 const resetBtn = document.querySelector('.btn-reset'); 
 const timeInput = document.querySelector('#timeInput'); 
+const breakTimeInput = document.querySelector('#breakTimeInput');
 const session = document.querySelector('.minutes'); 
 const appMessage = document.querySelector('.app-message');
+let onBreak = false;
+
 
 //pomordoro
 let myInterval; 
@@ -67,6 +70,15 @@ const getSessionTime = () => {
   return 25; // default
 }
 
+// get break time
+const getBreakTime = () => {
+  const inputValue = breakTimeInput.value;
+  if (inputValue && inputValue > 0 && inputValue <= 30) {
+    return parseInt(inputValue);
+  }
+  return 5; // default
+}
+
 // timer countdown function
 const updateSeconds = () => {
   totalSeconds--;
@@ -79,10 +91,23 @@ const updateSeconds = () => {
   if (minutesLeft === 0 && secondsLeft === 0) {
     bells.play();
     clearInterval(myInterval);
-    updateProgress(originalMinutes);
-    state = 'stopped';
-    appMessage.textContent = 'Time\'s up! Press start to begin again';
-    updateButtons();
+
+    if (!onBreak) {
+      // Finish study session
+      updateProgress(originalMinutes);
+      appMessage.textContent = 'Study done! Break time started.';
+      onBreak = true;
+      const breakMinutes = getBreakTime();
+      totalSeconds = breakMinutes * 60;
+      updateDisplay(breakMinutes, 0);
+      myInterval = setInterval(updateSeconds, 1000); // start break timer
+    } else {
+      // Finish break
+      appMessage.textContent = 'Break finished! Ready to start again.';
+      state = 'stopped';
+      onBreak = false;
+      updateButtons();
+    }
   }
 }
 
@@ -118,6 +143,7 @@ const pauseTimer = () => {
 const resetTimer = () => {
   clearInterval(myInterval);
   state = 'stopped';
+  onBreak = false;
   originalMinutes = getSessionTime();
   totalSeconds = originalMinutes * 60;
   updateDisplay(originalMinutes, 0);
@@ -146,6 +172,8 @@ const updateProgress = (sessionMinutes) => {
       recipeListElement.appendChild(li);
     }
   })
+  // storing recipes
+  localStorage.setItem('unlockedRecipes', JSON.stringify(unlockedRecipes));
 }
 
 

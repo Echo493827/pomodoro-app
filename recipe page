@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Unlocked Recipes</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <h1>Your Recipes</h1>
+    <ul id="fullRecipeList"></ul>
+    <a href="index.html" class="recipe-link">Back to Pomodoro</a>
+  </div>
+  <script>
+    const recipes = JSON.parse(localStorage.getItem('unlockedRecipes')) || [];
+    const ul = document.getElementById('fullRecipeList');
+    recipes.forEach(recipe => {
+      const li = document.createElement('li');
+      li.textContent = recipe;
+      ul.appendChild(li);
+    });
+  </script>
+</body>
+</html>

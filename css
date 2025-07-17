@@ -29,7 +29,8 @@ p {
 
 .app-container {
   width: 250px;
-  height: 500px;
+  min-height: 500px;
+  height: auto;
   margin: 40px auto;
   text-align: center;
   border-radius: 15px;
@@ -42,9 +43,9 @@ p {
 
 .app-circle {
   position: relative;
-  margin: 0 auto;
   width: 200px;
   height: 200px;
+  margin: 20px auto;
 }
 
 .circle-shape {
@@ -56,28 +57,29 @@ p {
   width: 100px;
   height: 200px;
   box-sizing: border-box;
-  border: solid 6px;
+  border: 6px solid;
 }
 
 .left-side {
   top: 0;
   left: 0;
-  transform-origin: right center;
-  transform: rotate(0deg);
+  border-right: none;
   border-top-left-radius: 100px;
   border-bottom-left-radius: 100px;
-  border-right: none;
-  z-index: 1;
+  transform-origin: right center;
+  transform: rotate(0deg);
+  z-index: 2;
 }
 
 .right-side {
   top: 0;
   left: 100px;
-  transform-origin: left center;
-  transform: rotate(0deg);
+  border-left: none;
   border-top-right-radius: 100px;
   border-bottom-right-radius: 100px;
-  border-left: none;
+  transform-origin: left center;
+  transform: rotate(0deg);
+  z-index: 2;
 }
 
 .circle {
@@ -89,17 +91,22 @@ p {
 }
 
 .app-counter-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: 'Droid Sans Mono', monospace;
-  font-size: 250%;
-  position: relative;
-  top: 50px;
+  font-size: 2rem;
   color: #f4e6d3;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin: 0;
 }
+
 
 /* Input styling */
 .time-input-container {
-  margin: 20px 0;
+  margin: 15px 0;
+  text-align: center;
 }
 
 .time-input-container label {
@@ -135,12 +142,11 @@ p {
 
 /* Button styling */
 .button-container {
-  position: relative;
-  top: 50px;
   display: flex;
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
+  margin-top: 10px;  /* Added margin for spacing */
 }
 
 button {
@@ -218,8 +224,13 @@ button:disabled:hover {
   text-align: left;
 }
 
+.unlocked-recipes {
+  margin-top: 10px;
+  font-size: 14px;  /* Adjust font size to fit better */
+}
+
 .unlocked-recipes h3 {
-  margin: 10px 0 5px;
+  margin: 5px 0;
   font-size: 16px;
   color: #FFE4C4;
 }
@@ -232,4 +243,18 @@ button:disabled:hover {
 .unlocked-recipes li {
   margin-bottom: 4px;
   color: #FFF8DC;
+}
+
+.recipe-link {
+  display: block;
+  margin-top: 10px;
+  color: #FFE4C4;
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+  overflow-wrap: break-word; /* Prevent long text from overflowing */
+}
+
+.recipe-link:hover {
+  color: #FFD700;
 }
