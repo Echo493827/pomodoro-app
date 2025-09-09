@@ -4,8 +4,7 @@ html {
   letter-spacing: 0.8px;
   min-height: 100vh;
   color: #f4e6d3;
-  background-image: 
-    url("assets/cafePhoto.jpg");
+  background-image: url("assets/cafePhoto.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
