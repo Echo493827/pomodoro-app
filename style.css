@@ -5,8 +5,7 @@ html {
   min-height: 100vh;
   color: #f4e6d3;
   background-image: 
-    /*linear-gradient(rgba(62, 39, 35, 0.8), rgba(101, 67, 33, 0.8)), */
-    url("https://stockcake.com/i/vintage-coffee-shop_572001_1019903");
+    url("assets/cafe img.jpg");
   background-size: contain, 120px 120px;
   background-repeat: no-repeat;
 }
